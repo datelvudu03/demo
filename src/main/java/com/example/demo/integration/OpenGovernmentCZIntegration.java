@@ -1,7 +1,8 @@
-package integration;
+package com.example.demo.integration;
 
-import dto.GeocodeResponse;
+import com.example.demo.dto.GeocodeResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import org.springframework.web.client.RestClient;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class OpenGovernmentCZIntegration {
 
     private final RestClient restClient = RestClient.create();
@@ -25,7 +27,9 @@ public class OpenGovernmentCZIntegration {
                 .uri(URL_BASE, query, apiKey)
                 .retrieve()
                 .toEntity(GeocodeResponse.class);
-        System.out.println(response.getBody());
+
+        log.info("{}", response.getBody());
+
         if (HttpStatusCode.valueOf(204).isSameCodeAs(response.getStatusCode())){
             System.out.println("getGeocodeInfo OK");
             return response.getBody();

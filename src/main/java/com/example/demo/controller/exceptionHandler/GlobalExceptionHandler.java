@@ -1,4 +1,4 @@
-package controller.exceptionHandler;
+package com.example.demo.controller.exceptionHandler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

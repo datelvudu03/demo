@@ -1,3 +1,4 @@
+/*
 package com.example.demo;
 
 import integration.OpenGovernmentCZIntegration;
@@ -9,3 +10,4 @@ public class Test {
         openGovernmentCZIntegration.getGeocodeInfo("preague");
     }
 }
+*/
