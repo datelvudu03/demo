@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS ticket (
+   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+   created TIMESTAMP DEFAULT current_timestamp,
+   position INT
+);

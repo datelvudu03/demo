@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: Ticketing System API
+  description: REST API for managing queue tickets at a branch
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /tickets:
+    post:
+      summary: Generate a new ticket
+      operationId: createTicket
+      responses:
+        '200':
+          description: Ticket successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+
+  /tickets/current:
+    get:
+      summary: Get the current (oldest) active ticket
+      operationId: getCurrentTicket
+      responses:
+        '200':
+          description: Current ticket
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+        '404':
+          description: No ticket found
+
+    delete:
+      summary: Remove the current (oldest) active ticket
+      operationId: removeCurrentTicket
+      responses:
+        '204':
+          description: Ticket removed successfully
+        '404':
+          description: No ticket to remove
+
+components:
+  schemas:
+    Ticket:
+      type: object
+      properties:
+        number:
+          type: integer
+          example: 1251
+        timestamp:
+          type: string
+          example: "2025-05-18T19:20:00"
+        position:
+          type: integer
+          example: 3
