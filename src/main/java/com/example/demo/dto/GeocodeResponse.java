@@ -2,14 +2,19 @@ package com.example.demo.dto;
 
 import lombok.Data;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Data
-public class GeocodeResponse {
+public class GeocodeResponse implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private Result[] results;
     private String credits;
     private String status;
 
     @Data
-    public static class Result {
+    public static class Result implements Serializable {
         private String clazz; // Use 'clazz' instead of 'class' because 'class' is a reserved keyword in Java
         private String type;
         private AddressComponents addressComponents;
@@ -18,7 +23,7 @@ public class GeocodeResponse {
         private String osmurl;
 
         @Data
-        public static class AddressComponents {
+        public static class AddressComponents implements Serializable{
             private String name;
             private String island;
             private String neighbourhood;
@@ -32,29 +37,29 @@ public class GeocodeResponse {
         }
 
         @Data
-        public static class Geometry {
+        public static class Geometry implements Serializable {
             private Location location;
             private Viewport viewport;
 
             @Data
-            public static class Location {
+            public static class Location implements Serializable{
                 private String lat;
                 private String lng;
             }
 
             @Data
-            public static class Viewport {
+            public static class Viewport implements Serializable {
                 private Northeast northeast;
                 private Southwest southwest;
 
                 @Data
-                public static class Northeast {
+                public static class Northeast implements Serializable{
                     private String lat;
                     private String lng;
                 }
 
                 @Data
-                public static class Southwest {
+                public static class Southwest implements Serializable{
                     private String lat;
                     private String lng;
                 }
