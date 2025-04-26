@@ -21,7 +21,7 @@ public class JmsConfig {
         factory.setBrokerURL("tcp://localhost:61616");
         factory.setUserName("admin");
         factory.setPassword("admin");
-        factory.setTrustedPackages(List.of("com.example.demo.dto"));
+        factory.setTrustedPackages(List.of("com.example.demo.dto", "com.example.demo.cmd.event"));
         return factory;
     }
 

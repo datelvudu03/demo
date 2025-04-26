@@ -1,5 +1,7 @@
 package com.example.demo.cmd.listener;
 
+import com.example.demo.cmd.JmsBus;
+import com.example.demo.cmd.event.BaseCmd;
 import com.example.demo.dto.DtoTest;
 import com.example.demo.dto.GeocodeResponse;
 import com.example.demo.integration.OpenGovernmentCZIntegration;
@@ -18,21 +20,18 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @Slf4j
 public class StartListener {
-    private final JmsTemplate jmsTemplate;
-    private final OpenGovernmentCZIntegration openGovernmentCZIntegration;
+    private final JmsBus jmsBus;
     @JmsListener(destination = "testQueue", concurrency = "5-10")
     public void receiveMessage(final Message message) throws JMSException {
         log.info("Received message: {}", message);
-        jmsTemplate.send(message.getJMSReplyTo(), new MessageCreator() {
-            @Override
-            public Message createMessage(Session session) throws JMSException {
-                ObjectMessage responseMsg = session.createObjectMessage();
-                responseMsg.setJMSCorrelationID(message.getJMSCorrelationID());
-                //responseMsg.setObjectProperty("Object", );
-                responseMsg.setObject(DtoTest.builder()
-                        .value("Value").build());
-                return responseMsg;
-            }
-        });
+        jmsBus.sendReply(message, BaseCmd.builder().value(DtoTest.builder().value("Value0").build()).build());
+      /*  jmsTemplate.send(message.getJMSReplyTo(), session -> {
+            ObjectMessage responseMsg = session.createObjectMessage();
+            responseMsg.setJMSCorrelationID(message.getJMSCorrelationID());
+            //responseMsg.setObjectProperty("Object", );
+            responseMsg.setObject(DtoTest.builder()
+                    .value("Value").build());
+            return responseMsg;
+        });*/
     }
 }
