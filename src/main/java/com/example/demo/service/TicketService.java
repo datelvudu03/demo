@@ -11,7 +11,6 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,8 +29,8 @@ public class TicketService {
                 .orElse(-1);
 
         TicketEntity ticket = repository.save(TicketEntity.builder()
-                        .created(LocalDateTime.now())
-                        .position(maxPosition + 1)
+                .created(LocalDateTime.now())
+                .position(maxPosition + 1)
                 .build());
         log.info("Generated ticket {}", ticket);
         return ticketMapper.mapTicketEntityToTicket(ticket);
@@ -50,10 +49,10 @@ public class TicketService {
             TicketEntity current = currentOpt.get();
             repository.delete(current);
             repository.shiftPositionsAfter(current.getPosition());
+            log.info("Removed ticket {}", current);
+        } else {
+            log.warn("No current ticket found");
         }
     }
 
-    public List<TicketEntity> getAllTickets() {
-        return repository.findAllByOrderByPositionAsc();
-    }
 }

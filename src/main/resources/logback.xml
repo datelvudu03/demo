@@ -10,7 +10,8 @@
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] [%X{X-B3-TraceId:-}] %-5level %logger{5} lc:%X{logCode:-NA} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] [%X{X-B3-TraceId:-}] %-5level %logger{5} lc:%X{logCode:-NA} - %msg%n
+            </pattern>
             <!--<pattern>%-5level %logger{0} - %msg%n</pattern>-->
         </encoder>
     </appender>
@@ -21,7 +22,8 @@
         <file>./logging/bc-servicing_${timestamp}.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] [%X{X-B3-TraceId:-}] %-5level %logger{5} lc:%X{logCode:-NA} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] [%X{X-B3-TraceId:-}] %-5level %logger{5} lc:%X{logCode:-NA} - %msg%n
+            </pattern>
             <!--<pattern>%-5level %logger{0} - %msg%n</pattern>-->
         </encoder>
     </appender>
