@@ -1,11 +1,12 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -13,6 +14,7 @@ import java.time.ZonedDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "ticket")
 public class TicketEntity {
     @Id
@@ -20,9 +22,8 @@ public class TicketEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private ZonedDateTime created;
+    private LocalDateTime created;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int position;
 
 }
