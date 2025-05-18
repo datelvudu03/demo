@@ -6,20 +6,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
+import java.time.ZonedDateTime;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user_entity")
-public class UserEntity {
+@Table(name = "ticket")
+public class TicketEntity {
     @Id
     @Column(name = "id", updatable = false, nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    private String name;
+    private ZonedDateTime created;
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int position;
 
 }
