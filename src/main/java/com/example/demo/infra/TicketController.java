@@ -1,6 +1,8 @@
 package com.example.demo.infra;
 
 
+import com.example.demo.command.base.CommandDispatcher;
+import com.example.demo.command.cmd.CreateTicketCommand;
 import com.example.demo.gen.api.TicketsApi;
 import com.example.demo.gen.model.Ticket;
 import com.example.demo.service.TicketService;
@@ -16,10 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class TicketController implements TicketsApi {
 
     private final TicketService ticketService;
+    private final CommandDispatcher commandDispatcher;
 
     @Override
     public ResponseEntity<Ticket> createTicket() {
         log.info("Called createTicket()");
+        commandDispatcher.dispatch(new CreateTicketCommand());
         return ResponseEntity.ok(ticketService.generateTicket());
     }
 
